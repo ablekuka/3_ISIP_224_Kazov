@@ -23,6 +23,47 @@ namespace ConsoleApp1
 
             string[] names = new string[count];
             double[] prices = new double[count];
+            
+            Console.WriteLine("\nВводите траты по шаблону: (Название; Цена)");
+            Console.WriteLine("Пример: (Влажные салфетки \"Лента\"; 235)");
+
+            for (int i = 0; i < count; i++)
+            {
+                while (true)
+                {
+                    Console.Write($"Запись {i + 1}: ");
+                    string input = Console.ReadLine();
+
+                    try
+                    {
+                       
+                        string trimmed = input.Trim().TrimStart('(').TrimEnd(')');
+                        string[] parts = trimmed.Split(';');
+
+                        if (parts.Length != 2)
+                        {
+                            throw new Exception("Неверный формат. Используйте точку с запятой ';'.");
+                        }
+
+                        string name = parts[0].Trim();
+                        double price = double.Parse(parts[1].Trim());
+
+                        if (price < 0)
+                        {
+                            throw new Exception("Цена не может быть отрицательной.");
+                        }
+
+                        names[i] = name;
+                        prices[i] = price;
+                        break; 
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Ошибка ввода: {ex.Message} Попробуйте снова.");
+                    }
+                }
+            }
+
         }
     }
 }
