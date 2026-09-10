@@ -25,7 +25,7 @@ namespace ConsoleApp1
             double[] prices = new double[count];
             
             Console.WriteLine("\nВводите траты по шаблону: (Название; Цена)");
-            Console.WriteLine("Пример: (Влажные салфетки \"Лента\"; 235)");
+            Console.WriteLine("Пример: Влажные салфетки \"Лента\"; 235");
 
             for (int i = 0; i < count; i++)
             {
@@ -201,6 +201,27 @@ namespace ConsoleApp1
             {
                 double converted = prices[i] / rate;
                 Console.WriteLine($"Операция {i + 1}: {prices[i]} руб. = {converted:F2} ед. валюты");
+            }
+        }
+        static void SearchByName(string[] names, double[] prices)
+        {
+            Console.Write("\nВведите название или часть названия для поиска: ");
+            string query = Console.ReadLine().Trim().ToLower();
+
+            bool found = false;
+            Console.WriteLine("Результаты поиска:");
+            for (int i = 0; i < names.Length; i++)
+            {
+                if (names[i].ToLower().Contains(query))
+                {
+                    Console.WriteLine($"[{i + 1}] {names[i]} — {prices[i]} руб.");
+                    found = true;
+                }
+            }
+
+            if (!found)
+            {
+                Console.WriteLine("Совпадений не найдено.");
             }
         }
     }
