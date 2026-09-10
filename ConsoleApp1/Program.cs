@@ -110,5 +110,34 @@ namespace ConsoleApp1
                 }
             }
         }
+        static void PrintData(string[] names, double[] prices)
+        {
+            Console.WriteLine("\nСписок зарегистрированных трат:");
+            for (int i = 0; i < names.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {names[i]} — {prices[i]} руб.");
+            }
+        }
+        static void ShowStatistics(double[] prices)
+        {
+            double sum = 0;
+            double max = prices[0];
+            double min = prices[0];
+
+            for (int i = 0; i < prices.Length; i++)
+            {
+                sum += prices[i];
+                if (prices[i] > max) max = prices[i];
+                if (prices[i] < min) min = prices[i];
+            }
+
+            double average = sum / prices.Length;
+
+            Console.WriteLine("\n--- СТАТИСТИКА ТРАТ ---");
+            Console.WriteLine($"Сумма всех трат:  {sum} руб.");
+            Console.WriteLine($"Среднее значение: {average:F2} руб.");
+            Console.WriteLine($"Максимальная:     {max} руб.");
+            Console.WriteLine($"Минимальная:      {min} руб.");
+        }
     }
 }
