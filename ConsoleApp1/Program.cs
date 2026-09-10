@@ -159,5 +159,49 @@ namespace ConsoleApp1
                 }
             }
         }
+        static void ConvertCurrency(double[] prices)
+        {
+            double rate = 0;
+            Console.WriteLine("\nВыберите вариант задания курса:");
+            Console.WriteLine("1. Выбрать из списка (USD: 90, EUR: 100, CNY: 13)");
+            Console.WriteLine("2. Ввести свой курс вручную");
+            Console.Write("Ваш выбор: ");
+            string mode = Console.ReadLine();
+
+            if (mode == "1")
+            {
+                Console.WriteLine("Выберите валюту: 1 - USD (90), 2 - EUR (100), 3 - CNY (13)");
+                string currency = Console.ReadLine();
+                if (currency == "1") rate = 90;
+                else if (currency == "2") rate = 100;
+                else if (currency == "3") rate = 13;
+                else
+                {
+                    Console.WriteLine("Неверный выбор. Отмена конвертации.");
+                    return;
+                }
+            }
+            else if (mode == "2")
+            {
+                Console.Write("Введите курс валюты к рублю (сколько рублей в 1 ед. валюты): ");
+                if (!double.TryParse(Console.ReadLine(), out rate) || rate <= 0)
+                {
+                    Console.WriteLine("Некорректный курс. Отмена конвертации.");
+                    return;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Неверный вариант.");
+                return;
+            }
+
+            Console.WriteLine($"\nПересчет стоимости (по курсу {rate} руб.):");
+            for (int i = 0; i < prices.Length; i++)
+            {
+                double converted = prices[i] / rate;
+                Console.WriteLine($"Операция {i + 1}: {prices[i]} руб. = {converted:F2} ед. валюты");
+            }
+        }
     }
 }
